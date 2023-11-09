@@ -1,15 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:workout/app.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    String apa = "apa";
-    throw UnimplementedError();
-  }
-}
+void main() => runApp(const App());

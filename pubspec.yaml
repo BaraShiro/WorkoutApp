@@ -1,5 +1,6 @@
 name: workout
 description: An app for keeping track of your workout sessions!
+repository: https://github.com/BaraShiro/WorkoutApp
 
 publish_to: 'none'
 
@@ -16,6 +17,8 @@ dependencies:
 
   cupertino_icons: ^1.0.2
 
+  equatable: ^2.0.0
+
 dev_dependencies:
   bloc_test: ^9.1.5
   flutter_test:
@@ -25,6 +28,7 @@ dev_dependencies:
   mocktail: ^1.0.1
 
   flutter_lints: ^3.0.1
+
 
 flutter:
   uses-material-design: true
