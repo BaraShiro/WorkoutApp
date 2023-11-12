@@ -18,7 +18,7 @@ final class AddSessionEvent extends DashboardEvent {
 }
 
 final class DeleteSessionEvent extends DashboardEvent {
-  final String uuid;
+  final UUID uuid;
 
   const DeleteSessionEvent({required this.uuid});
   @override

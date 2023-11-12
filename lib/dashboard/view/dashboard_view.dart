@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:workout/dashboard/dashboard.dart';
-import 'package:workout_model/src/workout_model_base.dart';
 import 'package:workout_model/workout_model.dart';
 
 abstract class DashboardView extends StatelessWidget {
@@ -75,7 +74,7 @@ class DashboardWithContentView extends DashboardView {
             title: Text(statusString),
             subtitle: Text('Number of exercises: ${workout.exercises.length} \n$startedOn'),
             trailing: IconButton(
-                    onPressed: () => {},
+                    onPressed: () => Navigator.push(context, HomePage.route()),
                     icon: const Icon(Icons.find_in_page)
                 ),
           ),
