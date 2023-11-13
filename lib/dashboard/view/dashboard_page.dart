@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:workout/dashboard/dashboard.dart';
+import 'package:workout/loading/loading.dart';
+import 'package:workout/error/error.dart';
 import 'package:workout_model/workout_model.dart';
 
 class DashboardPage extends StatelessWidget {
@@ -37,13 +39,18 @@ class DashboardPage extends StatelessWidget {
               builder: (context, DashboardState state) {
                 switch (state) {
                   case DashboardInitial():
-                    return DashboardWithContentView(msg: 'Initial', workouts: [],);
+                    return const LoadingPage();
                   case DashboardInProgress():
-                    return DashboardLoadingView();
+                    return const LoadingPage();
                   case DashboardSuccess():
                     return DashboardWithContentView(msg: 'Success!', workouts: state.workouts,);
                   case DashboardFailure():
-                    return DashboardWithErrorView(error: state.error);
+                    return ErrorView(
+                      error: state.error,
+                      reloadFunction: () => {
+                        context.read<DashboardBloc>().add(GetAllSessionsEvent())
+                      },
+                    );
                 }
               }
           ),
