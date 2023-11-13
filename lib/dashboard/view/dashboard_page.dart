@@ -43,7 +43,7 @@ class DashboardPage extends StatelessWidget {
                   case DashboardInProgress():
                     return const LoadingPage();
                   case DashboardSuccess():
-                    return DashboardWithContentView(msg: 'Success!', workouts: state.workouts,);
+                    return DashboardView(workouts: state.workouts,);
                   case DashboardFailure():
                     return ErrorView(
                       error: state.error,

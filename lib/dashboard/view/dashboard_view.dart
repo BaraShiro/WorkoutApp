@@ -3,14 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:workout/dashboard/dashboard.dart';
 import 'package:workout_model/workout_model.dart';
 
-abstract class DashboardView extends StatelessWidget {
-  const DashboardView({super.key});
-}
-
-class DashboardWithContentView extends DashboardView {
-  final String msg;
+class DashboardView extends StatelessWidget {
   final List<Workout> workouts;
-  const DashboardWithContentView({super.key, required this.msg, required this.workouts});
+  const DashboardView({super.key, required this.workouts});
 
   @override
   Widget build(BuildContext context) {
