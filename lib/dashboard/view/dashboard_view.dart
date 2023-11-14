@@ -11,23 +11,24 @@ class DashboardView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: workouts.isNotEmpty
-            ? ListView.builder(
-                padding: const EdgeInsets.only(bottom: 200, top: 10),
-                itemCount: workouts.length,
-                itemBuilder: (BuildContext context, int index,) {
-                  return workoutSessionWidget(workouts[index], context);
-                }
-            )
-            : const Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text('No workout sessions found!'),
-                    Text('Add a new session and start working out!')
-                  ] ,
-                )
-        ),
+        child: switch (workouts.isEmpty) {
+          true => const Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('No workout sessions found!'),
+                  Text('Add a new session and start working out!')
+                ],
+              )
+          ),
+          false => ListView.builder(
+              padding: const EdgeInsets.only(bottom: 200, top: 10),
+              itemCount: workouts.length,
+              itemBuilder: (BuildContext context, int index,) {
+                return workoutSessionWidget(workouts[index], context);
+              }
+              ),
+        },
       ),
       floatingActionButton: FloatingActionButton.extended(
         backgroundColor: Theme.of(context).colorScheme.primary,
