@@ -11,13 +11,9 @@ part 'dashboard_state.dart';
 
 class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
   final WorkoutRepository _workoutRepository;
-  final ExerciseRepository _exerciseRepository;
 
-  DashboardBloc(
-      {required WorkoutRepository workoutRepository,
-      required ExerciseRepository exerciseRepository})
+  DashboardBloc({required WorkoutRepository workoutRepository})
       : _workoutRepository = workoutRepository,
-        _exerciseRepository = exerciseRepository,
         super(DashboardInitial()) {
     on<DashboardEvent>((DashboardEvent event, Emitter<DashboardState> emit) async {
       switch (event) {
