@@ -33,7 +33,6 @@ class DashboardPage extends StatelessWidget {
         child: BlocProvider(
           create: (_) => DashboardBloc(
               workoutRepository: WorkoutRepository.instance,
-              exerciseRepository: ExerciseRepository.instance
           )..add(GetAllSessionsEvent()),
           child: BlocBuilder<DashboardBloc, DashboardState>(
               builder: (context, DashboardState state) {

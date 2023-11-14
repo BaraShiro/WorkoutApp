@@ -13,7 +13,7 @@ class DashboardView extends StatelessWidget {
       body: Center(
         child: workouts.isNotEmpty
             ? ListView.builder(
-                padding: const EdgeInsets.only(bottom: 200),
+                padding: const EdgeInsets.only(bottom: 200, top: 10),
                 itemCount: workouts.length,
                 itemBuilder: (BuildContext context, int index,) {
                   return workoutSessionWidget(workouts[index], context);
@@ -40,40 +40,11 @@ class DashboardView extends StatelessWidget {
   }
 
   Widget workoutSessionWidget(Workout workout, BuildContext context) {
-    String statusString = switch (workout.state) {
-      WorkoutState.notStarted => "New session",
-      WorkoutState.running => "Running session",
-      WorkoutState.paused => "Paused session",
-      WorkoutState.finished => "Finished session",
-    };
-
-    String startedOn = workout.startTime != null
-        ? "Started on: ${workout.startTime}"
-        : "Not started yet";
 
     return Center(
       child: Padding(
         padding: const EdgeInsets.only(left: 5, right: 5),
-        child: Card(
-          color: Theme.of(context).colorScheme.surfaceVariant,
-          elevation: 0,
-          shape: RoundedRectangleBorder(
-            side: BorderSide(
-              color: Theme.of(context).colorScheme.outline,
-            ),
-            borderRadius: const BorderRadius.all(Radius.circular(12)),
-          ),
-          child: ListTile(
-            isThreeLine: true,
-            leading: Icon(Icons.directions_run),
-            title: Text(statusString),
-            subtitle: Text('Number of exercises: ${workout.exercises.length} \n$startedOn'),
-            trailing: IconButton(
-                    onPressed: () => Navigator.push(context, HomePage.route()),
-                    icon: const Icon(Icons.find_in_page)
-                ),
-          ),
-        ),
+        child: DashboardCardWidget(workout: workout,),
       ),
     );
   }
