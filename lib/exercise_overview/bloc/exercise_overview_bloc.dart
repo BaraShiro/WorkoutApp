@@ -27,6 +27,8 @@ class ExerciseOverviewBloc extends Bloc<ExerciseOverviewEvent, ExerciseOverviewS
   }
 
   Future<void> _handleGetAllExercisesEvent(GetAllExercisesEvent event, Emitter<ExerciseOverviewState> emit) async {
+    emit(ExerciseOverviewGetInProgress());
+
     Either<RepositoryError, List<Exercise>> result = await _exerciseRepository.list();
 
     result.match(
@@ -36,6 +38,8 @@ class ExerciseOverviewBloc extends Bloc<ExerciseOverviewEvent, ExerciseOverviewS
   }
 
   Future<void> _handleAddExerciseEvent(AddExerciseEvent event, Emitter<ExerciseOverviewState> emit) async {
+    emit(ExerciseOverviewGetInProgress());
+
     Either<RepositoryError, Exercise> createResult = await _exerciseRepository.create(event.exercise);
 
     await createResult.match(
@@ -52,6 +56,7 @@ class ExerciseOverviewBloc extends Bloc<ExerciseOverviewEvent, ExerciseOverviewS
   }
 
   Future<void> _handleDeleteExercisesEvent(DeleteExercisesEvent event, Emitter<ExerciseOverviewState> emit) async {
+    emit(ExerciseOverviewGetInProgress());
     Option<RepositoryError> deleteResult = await _exerciseRepository.delete(event.exerciseUuid);
 
     await deleteResult.match(

@@ -34,6 +34,8 @@ class SessionBloc extends Bloc<SessionEvent, SessionState> {
   }
 
   Future<void> _handleSessionInitEvent({required SessionInitEvent event, required Emitter<SessionState> emit}) async {
+    emit(SessionGetInProgress());
+
     Either<RepositoryError, Workout> readResult = await _workoutRepository.read(event.sessionUuid);
 
     readResult.match(
@@ -43,6 +45,8 @@ class SessionBloc extends Bloc<SessionEvent, SessionState> {
   }
 
   Future<void> _handleSessionStartEvent({required SessionStartEvent event, required Emitter<SessionState> emit}) async {
+    emit(SessionGetInProgress());
+
     Either<RepositoryError, Workout> readResult = await _workoutRepository.read(event.sessionUuid);
 
     await readResult.match(
@@ -60,6 +64,8 @@ class SessionBloc extends Bloc<SessionEvent, SessionState> {
   }
 
   Future<void> _handleSessionPauseEvent({required SessionPauseEvent event, required Emitter<SessionState> emit}) async {
+    emit(SessionGetInProgress());
+
     Either<RepositoryError, Workout> readResult = await _workoutRepository.read(event.sessionUuid);
 
     await readResult.match(
@@ -77,6 +83,8 @@ class SessionBloc extends Bloc<SessionEvent, SessionState> {
   }
 
   Future<void> _handleSessionResumeEvent({required SessionResumeEvent event, required Emitter<SessionState> emit}) async {
+    emit(SessionGetInProgress());
+
     Either<RepositoryError, Workout> readResult = await _workoutRepository.read(event.sessionUuid);
 
     await readResult.match(
@@ -94,6 +102,8 @@ class SessionBloc extends Bloc<SessionEvent, SessionState> {
   }
 
   Future<void> _handleSessionFinishEvent({required SessionFinishEvent event, required Emitter<SessionState> emit}) async {
+    emit(SessionGetInProgress());
+
     Either<RepositoryError, Workout> readResult = await _workoutRepository.read(event.sessionUuid);
 
     await readResult.match(
@@ -111,12 +121,6 @@ class SessionBloc extends Bloc<SessionEvent, SessionState> {
   }
 
   Future<void> _handleSessionDeleteEvent({required SessionDeleteEvent event, required Emitter<SessionState> emit}) async {
-
+    // TODO: remove
   }
 }
-
-
-
-// run command on workout
-// write workout to database
-// emit success with new workout, or failure with error
