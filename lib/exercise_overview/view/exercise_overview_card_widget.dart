@@ -23,12 +23,13 @@ class ExerciseOverviewCardWidget extends StatelessWidget {
       clipBehavior: Clip.hardEdge,
       child: InkWell(
         splashColor: Theme.of(context).colorScheme.primary.withAlpha(50),
-        onTap: () => {},//Navigator.push(context, SessionPage.route(workout.uuid))
+        // onTap: () => Navigator.push(context, ExercisePage.route(exercise.uuid))
         //     .whenComplete(
-        //       () => context.read<DashboardBloc>().add(GetAllSessionsEvent()),
+        //       () => context.read<ExerciseOverviewBloc>().add(GetAllExercisesEvent()),
         // ),
         child: ListTile(
           isThreeLine: true,
+          titleAlignment: ListTileTitleAlignment.center,
           leading: Icon(
             Icons.fitness_center,
             color: Theme.of(context).colorScheme.primary,

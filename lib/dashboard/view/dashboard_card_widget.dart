@@ -29,6 +29,7 @@ class DashboardCardWidget extends StatelessWidget {
         ),
         child: ListTile(
           isThreeLine: true,
+          titleAlignment: ListTileTitleAlignment.center,
           leading: Icon(
             Icons.directions_run,
             color: Theme.of(context).colorScheme.primary,
