@@ -37,6 +37,7 @@ class DashboardPage extends StatelessWidget {
               workoutRepository: WorkoutRepository.instance,
           )..add(GetAllSessionsEvent()),
           child: BlocBuilder<DashboardBloc, DashboardState>(
+              buildWhen: (previous, current) => previous != current,
               builder: (context, DashboardState state) {
                 switch (state) {
                   case DashboardInitial():

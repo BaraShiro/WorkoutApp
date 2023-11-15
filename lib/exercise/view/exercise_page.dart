@@ -37,6 +37,7 @@ class ExercisePage extends StatelessWidget {
                 exerciseRepository: ExerciseRepository.instance
             )..add(ExerciseInitEvent(exerciseUuid: exerciseUuid)),
             child: BlocBuilder<ExerciseBloc, ExerciseState>(
+                buildWhen: (previous, current) => previous != current,
                 builder: (context, ExerciseState state) {
                   switch (state) {
                     case ExerciseInitial():

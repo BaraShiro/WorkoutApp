@@ -37,6 +37,7 @@ class SessionPage extends StatelessWidget {
                 workoutRepository: WorkoutRepository.instance
             )..add(SessionInitEvent(sessionUuid: sessionUuid)),
             child: BlocBuilder<SessionBloc, SessionState>(
+                buildWhen: (previous, current) => previous != current,
                 builder: (context, SessionState state) {
                   switch (state) {
                     case SessionInitial():

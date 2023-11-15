@@ -35,6 +35,7 @@ class ExerciseOverviewPage extends StatelessWidget {
               exerciseRepository: ExerciseRepository.instance,
             )..add(GetAllExercisesEvent()),
             child: BlocBuilder<ExerciseOverviewBloc, ExerciseOverviewState>(
+                buildWhen: (previous, current) => previous != current,
                 builder: (context, ExerciseOverviewState state) {
                   switch (state) {
                     case ExerciseOverviewInitial():
