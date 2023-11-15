@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:material_symbols_icons/symbols.dart';
 import 'package:workout_model/workout_model.dart';
 import 'package:workout/dashboard/dashboard.dart';
 import 'package:workout/session/session.dart';
@@ -31,7 +32,7 @@ class DashboardCardWidget extends StatelessWidget {
           isThreeLine: true,
           titleAlignment: ListTileTitleAlignment.center,
           leading: Icon(
-            Icons.directions_run,
+            Symbols.directions_run,
             color: Theme.of(context).colorScheme.primary,
             size: 48,
           ),
@@ -69,7 +70,7 @@ class DashboardCardWidget extends StatelessWidget {
           trailing: IconButton(
               onPressed: () => context.read<DashboardBloc>().add(DeleteSessionEvent(uuid: workout.uuid)),
               icon: Icon(
-                Icons.delete,
+                Symbols.delete,
                 color: Theme.of(context).colorScheme.error,
               )
           ),

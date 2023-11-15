@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:material_symbols_icons/symbols.dart';
 import 'package:workout/dashboard/dashboard.dart';
 import 'package:workout/exercise_overview/exercise_overview.dart';
 import 'package:workout/loading/loading.dart';
@@ -21,7 +22,7 @@ class DashboardPage extends StatelessWidget {
         actions: <Widget>[
           TextButton.icon(
             onPressed: () => Navigator.push(context, ExerciseOverviewPage.route()),
-            icon: const Icon(Icons.fitness_center),
+            icon: const Icon(Symbols.exercise),
             label: const Text("Exercises"),
             style: TextButton.styleFrom(
                 foregroundColor: Theme.of(context).colorScheme.inversePrimary

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:material_symbols_icons/symbols.dart';
 import 'package:workout_model/workout_model.dart';
 import 'package:workout/exercise_overview/exercise_overview.dart';
 import 'package:workout/exercise/exercise.dart';
@@ -31,7 +32,7 @@ class ExerciseOverviewCardWidget extends StatelessWidget {
           isThreeLine: true,
           titleAlignment: ListTileTitleAlignment.center,
           leading: Icon(
-            Icons.fitness_center,
+            Symbols.exercise,
             color: Theme.of(context).colorScheme.primary,
             size: 48,
           ),
@@ -46,7 +47,7 @@ class ExerciseOverviewCardWidget extends StatelessWidget {
           trailing: IconButton(
               onPressed: () => context.read<ExerciseOverviewBloc>().add(DeleteExercisesEvent(exerciseUuid: exercise.uuid)),
               icon: Icon(
-                Icons.delete,
+                Symbols.delete,
                 color: Theme.of(context).colorScheme.error,
               )
           ),
