@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:workout/dashboard/dashboard.dart';
+import 'package:workout/exercise_overview/exercise_overview.dart';
 import 'package:workout/loading/loading.dart';
 import 'package:workout/error/error.dart';
 import 'package:workout_model/workout_model.dart';
@@ -19,7 +20,7 @@ class DashboardPage extends StatelessWidget {
           title: const Text('Workouts'),
         actions: <Widget>[
           TextButton.icon(
-            onPressed: () => {},
+            onPressed: () => Navigator.push(context, ExerciseOverviewPage.route()),
             icon: const Icon(Icons.fitness_center),
             label: const Text("Exercises"),
             style: TextButton.styleFrom(

@@ -36,10 +36,34 @@ class ExerciseOverviewBloc extends Bloc<ExerciseOverviewEvent, ExerciseOverviewS
   }
 
   Future<void> _handleAddExerciseEvent(AddExerciseEvent event, Emitter<ExerciseOverviewState> emit) async {
+    Either<RepositoryError, Exercise> createResult = await _exerciseRepository.create(event.exercise);
 
+    await createResult.match(
+            (l) async => emit(ExerciseOverviewGetFailure(error: l)),
+            (r) async {
+              Either<RepositoryError, List<Exercise>> listResult = await _exerciseRepository.list();
+
+              listResult.match(
+                      (l) => emit(ExerciseOverviewGetFailure(error: l)),
+                      (r) => emit(ExerciseOverviewGetSuccess(exercises: r))
+              );
+            }
+    );
   }
 
   Future<void> _handleDeleteExercisesEvent(DeleteExercisesEvent event, Emitter<ExerciseOverviewState> emit) async {
+    Option<RepositoryError> deleteResult = await _exerciseRepository.delete(event.exerciseUuid);
 
+    await deleteResult.match(
+            () async {
+              Either<RepositoryError, List<Exercise>> listResult = await _exerciseRepository.list();
+
+              listResult.match(
+                      (l) => emit(ExerciseOverviewGetFailure(error: l)),
+                      (r) => emit(ExerciseOverviewGetSuccess(exercises: r))
+              );
+            },
+            (t) async => emit(ExerciseOverviewGetFailure(error: t))
+    );
   }
 }
