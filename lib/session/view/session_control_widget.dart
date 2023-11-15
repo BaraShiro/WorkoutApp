@@ -14,50 +14,70 @@ class SessionControlWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: switch (workout.state) {
         WorkoutState.notStarted => [
-          TextButton.icon(
-            onPressed: () => {context.read<SessionBloc>().add(SessionStartEvent(sessionUuid: workout.uuid))},
-            icon: const Icon(Icons.play_arrow),
-            label: const Text("Start"),
-            style: TextButton.styleFrom(
-                foregroundColor: Theme.of(context).colorScheme.primary
+          Padding(
+            padding: const EdgeInsets.all(2),
+            child: TextButton.icon(
+              onPressed: () => {context.read<SessionBloc>().add(SessionStartEvent(sessionUuid: workout.uuid))},
+              icon: const Icon(Icons.play_arrow),
+              label: const Text("Start"),
+              style: TextButton.styleFrom(
+                  foregroundColor: Theme.of(context).colorScheme.onPrimaryContainer,
+                  backgroundColor: Theme.of(context).colorScheme.primaryContainer
+              ),
             ),
           ),
         ],
         WorkoutState.running => [
-          TextButton.icon(
-            onPressed: () => {context.read<SessionBloc>().add(SessionPauseEvent(sessionUuid: workout.uuid))},
-            icon: const Icon(Icons.pause),
-            label: const Text("Pause"),
-            style: TextButton.styleFrom(
-                foregroundColor: Theme.of(context).colorScheme.primary
+          Padding(
+            padding: const EdgeInsets.all(2),
+            child: TextButton.icon(
+              onPressed: () => {context.read<SessionBloc>().add(SessionPauseEvent(sessionUuid: workout.uuid))},
+              icon: const Icon(Icons.pause),
+              label: const Text("Pause"),
+              style: TextButton.styleFrom(
+                  foregroundColor: Theme.of(context).colorScheme.onPrimaryContainer,
+                  backgroundColor: Theme.of(context).colorScheme.primaryContainer
+              ),
             ),
           ),
-          TextButton.icon(
-            onPressed: () => {context.read<SessionBloc>().add(SessionFinishEvent(sessionUuid: workout.uuid))},
-            icon: const Icon(Icons.stop),
-            label: const Text("Finish"),
-            style: TextButton.styleFrom(
-                foregroundColor: Theme.of(context).colorScheme.primary
+          Padding(
+            padding: const EdgeInsets.all(2),
+            child: TextButton.icon(
+              onPressed: () => {context.read<SessionBloc>().add(SessionFinishEvent(sessionUuid: workout.uuid))},
+              icon: const Icon(Icons.stop),
+              label: const Text("Finish"),
+              style: TextButton.styleFrom(
+                  foregroundColor: Theme.of(context).colorScheme.onPrimaryContainer,
+                  backgroundColor: Theme.of(context).colorScheme.primaryContainer
+              ),
             ),
           ),
         ],
         WorkoutState.paused => [
-          TextButton.icon(
-            onPressed: () => {context.read<SessionBloc>().add(SessionResumeEvent(sessionUuid: workout.uuid))},
-            icon: const Icon(Icons.play_arrow_outlined),
-            label: const Text("Resume"),
-            style: TextButton.styleFrom(
-                foregroundColor: Theme.of(context).colorScheme.primary
+          Padding(
+            padding: const EdgeInsets.all(2),
+            child: TextButton.icon(
+              onPressed: () => {context.read<SessionBloc>().add(SessionResumeEvent(sessionUuid: workout.uuid))},
+              icon: const Icon(Icons.play_arrow_outlined),
+              label: const Text("Resume"),
+              style: TextButton.styleFrom(
+                  foregroundColor: Theme.of(context).colorScheme.onPrimaryContainer,
+                  backgroundColor: Theme.of(context).colorScheme.primaryContainer
+              ),
             ),
           ),
         ],
         WorkoutState.finished => [
-          TextButton.icon(
-            onPressed: () => {context.read<SessionBloc>().add(SessionInitEvent(sessionUuid: workout.uuid))},
-            icon: const Icon(Icons.replay),
-            label: const Text("Reset"),
-            style: TextButton.styleFrom(
-                foregroundColor: Theme.of(context).colorScheme.primary
+          Padding(
+            padding: const EdgeInsets.all(2),
+            child: TextButton.icon(
+              onPressed: () => {context.read<SessionBloc>().add(SessionInitEvent(sessionUuid: workout.uuid))},
+              icon: const Icon(Icons.replay),
+              label: const Text("Reset"),
+              style: TextButton.styleFrom(
+                  foregroundColor: Theme.of(context).colorScheme.onPrimaryContainer,
+                  backgroundColor: Theme.of(context).colorScheme.primaryContainer
+              ),
             ),
           ),
         ],
