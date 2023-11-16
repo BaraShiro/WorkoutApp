@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'package:workout/exercise_overview/exercise_overview.dart';
+import 'package:workout/add_exercise/add_exercise.dart';
 import 'package:workout_model/workout_model.dart';
 
 class ExerciseOverviewView extends StatelessWidget {
@@ -35,7 +36,11 @@ class ExerciseOverviewView extends StatelessWidget {
       floatingActionButton: FloatingActionButton.extended(
         backgroundColor: Theme.of(context).colorScheme.primary,
         foregroundColor: Theme.of(context).colorScheme.inversePrimary,
-        onPressed: () => {context.read<ExerciseOverviewBloc>().add(AddExerciseEvent(exercise: Exercise(name: "Exercise", description: "Something", numberOfRepetitions: 2, restTimeInMinutes: 1, numberOfSets: 2, weightInKilograms: 5)))},
+        onPressed: () => Navigator.push(context, AddExercisePage.route())
+            .whenComplete(
+              () => context.read<ExerciseOverviewBloc>().add(GetAllExercisesEvent()),
+        ),
+        // onPressed: () => {context.read<ExerciseOverviewBloc>().add(AddExerciseEvent(exercise: Exercise(name: "Exercise", description: "Something", numberOfRepetitions: 2, restTimeInMinutes: 1, numberOfSets: 2, weightInKilograms: 5)))},
         label: const Text("New exercise"),
         icon: const Icon(Symbols.add),
       ),
