@@ -145,7 +145,7 @@ class AddExerciseView extends StatelessWidget {
               backgroundColor: Theme.of(context).colorScheme.errorContainer,
               foregroundColor: Theme.of(context).colorScheme.onErrorContainer,
               onPressed: () => {},
-              label: const Text("Fix errors to add exercise"),
+              label: const Text("Fill out form to add exercise"),
               icon: const Icon(Symbols.error),
             );
           }
