@@ -100,13 +100,25 @@ class AddSessionView extends StatelessWidget {
                               state.selectedExercises[index], index, context);
                         }),
                   },
-                  IconButton(
-                      onPressed: () => {
-                            context.read<AddSessionBloc>().add(
-                                AddExerciseToListEvent(
-                                    exercise: state.allExercises[0]))
-                          },
-                      icon: Icon(Symbols.add))
+
+                  DropdownButtonHideUnderline(
+                    child: Center(
+                      child: DropdownButton(
+                        // isExpanded: true,
+                        hint: const Text("Select an exercise to add"),
+                        disabledHint: const Text("No exercises found"),
+                        items: state.allExercises.map<DropdownMenuItem<Exercise>>((Exercise value) {
+                          return DropdownMenuItem<Exercise>(value: value, child: Text(value.name));
+                        }).toList(),
+                        onChanged: (exercise) => {
+                          context.read<AddSessionBloc>().add(
+                              AddExerciseToListEvent(exercise: exercise!)
+                          )
+                        },
+
+                      ),
+                    ),
+                  ),
                 ],
               );
             },
@@ -160,4 +172,6 @@ class AddSessionView extends StatelessWidget {
       ),
     );
   }
+
+
 }
