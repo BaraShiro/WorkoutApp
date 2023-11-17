@@ -19,18 +19,7 @@ class SessionPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Workout session'),
-        // actions: <Widget>[
-        //   TextButton.icon(
-        //     onPressed: () => {},
-        //     icon: const Icon(Icons.delete),
-        //     label: const Text("Delete"),
-        //     style: TextButton.styleFrom(
-        //         foregroundColor: Theme.of(context).colorScheme.inversePrimary
-        //     ),
-        //   ),
-        // ],
       ),
-
       body: Center(
           child: BlocProvider(
             create: (_) => SessionBloc(
@@ -56,7 +45,6 @@ class SessionPage extends StatelessWidget {
                 }
               }
             ),
-
           )
       ),
     );

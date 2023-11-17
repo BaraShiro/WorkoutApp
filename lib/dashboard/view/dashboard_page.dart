@@ -18,48 +18,47 @@ class DashboardPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: const Text('Workouts'),
+        title: const Text('Workouts'),
         actions: <Widget>[
           TextButton.icon(
-            onPressed: () => Navigator.push(context, ExerciseOverviewPage.route()),
+            onPressed: () =>
+                Navigator.push(context, ExerciseOverviewPage.route()),
             icon: const Icon(Symbols.exercise),
             label: const Text("Exercises"),
             style: TextButton.styleFrom(
-                foregroundColor: Theme.of(context).colorScheme.inversePrimary
-            ),
+                backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+                foregroundColor:
+                    Theme.of(context).colorScheme.onPrimaryContainer),
           ),
         ],
       ),
-
       body: Center(
-        child: BlocProvider(
-          create: (_) => DashboardBloc(
-              workoutRepository: WorkoutRepository.instance,
-          )..add(GetAllSessionsEvent()),
-          child: BlocBuilder<DashboardBloc, DashboardState>(
-              buildWhen: (previous, current) => previous != current,
-              builder: (context, DashboardState state) {
-                switch (state) {
-                  case DashboardInitial():
-                    return const LoadingPage();
-                  case DashboardInProgress():
-                    return const LoadingPage();
-                  case DashboardSuccess():
-                    return DashboardView(workouts: state.workouts,);
-                  case DashboardFailure():
-                    return ErrorView(
-                      error: state.error,
-                      reloadFunction: () => {
-                        context.read<DashboardBloc>().add(GetAllSessionsEvent())
-                      },
-                    );
-                }
+          child: BlocProvider(
+        create: (_) => DashboardBloc(
+          workoutRepository: WorkoutRepository.instance,
+        )..add(GetAllSessionsEvent()),
+        child: BlocBuilder<DashboardBloc, DashboardState>(
+            buildWhen: (previous, current) => previous != current,
+            builder: (context, DashboardState state) {
+              switch (state) {
+                case DashboardInitial():
+                  return const LoadingPage();
+                case DashboardInProgress():
+                  return const LoadingPage();
+                case DashboardSuccess():
+                  return DashboardView(
+                    workouts: state.workouts,
+                  );
+                case DashboardFailure():
+                  return ErrorView(
+                    error: state.error,
+                    reloadFunction: () => {
+                      context.read<DashboardBloc>().add(GetAllSessionsEvent())
+                    },
+                  );
               }
-          ),
-
-        )
-      ),
+            }),
+      )),
     );
   }
 }
-

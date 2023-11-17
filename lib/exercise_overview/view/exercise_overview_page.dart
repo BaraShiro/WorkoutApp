@@ -17,18 +17,7 @@ class ExerciseOverviewPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Exercises'),
-        // actions: <Widget>[
-        //   TextButton.icon(
-        //     onPressed: () => {},
-        //     icon: const Icon(Icons.fitness_center),
-        //     label: const Text("Exercises"),
-        //     style: TextButton.styleFrom(
-        //         foregroundColor: Theme.of(context).colorScheme.inversePrimary
-        //     ),
-        //   ),
-        // ],
       ),
-
       body: Center(
           child: BlocProvider(
             create: (_) => ExerciseOverviewBloc(
@@ -54,7 +43,6 @@ class ExerciseOverviewPage extends StatelessWidget {
                   }
                 }
             ),
-
           )
       ),
     );

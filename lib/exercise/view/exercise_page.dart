@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:material_symbols_icons/symbols.dart';
 import 'package:workout/exercise/exercise.dart';
 import 'package:workout/loading/loading.dart';
 import 'package:workout/error/error.dart';
@@ -19,18 +20,18 @@ class ExercisePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Exercise'),
-        // actions: <Widget>[
-        //   TextButton.icon(
-        //     onPressed: () => {},
-        //     icon: const Icon(Icons.delete),
-        //     label: const Text("Delete"),
-        //     style: TextButton.styleFrom(
-        //         foregroundColor: Theme.of(context).colorScheme.inversePrimary
-        //     ),
-        //   ),
-        // ],
+        actions: <Widget>[
+          TextButton.icon(
+            onPressed: () => {},
+            icon: const Icon(Symbols.edit_note),
+            label: const Text("Edit"),
+            style: TextButton.styleFrom(
+                backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+                foregroundColor: Theme.of(context).colorScheme.onPrimaryContainer,
+            ),
+          ),
+        ],
       ),
-
       body: Center(
           child: BlocProvider(
             create: (_) => ExerciseBloc(
@@ -56,10 +57,8 @@ class ExercisePage extends StatelessWidget {
                   }
                 }
             ),
-
           )
       ),
     );
   }
 }
-

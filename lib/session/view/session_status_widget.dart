@@ -12,10 +12,16 @@ class SessionStatusWidget extends StatelessWidget {
     return Column(
       children: switch (workout.state) {
         WorkoutState.notStarted => [
-          const Text("New session"),
+          Text(
+            "New session",
+            style: Theme.of(context).textTheme.titleLarge,
+          ),
         ],
         WorkoutState.running => [
-          const Text("Running session"),
+          Text(
+            "Running session",
+            style: Theme.of(context).textTheme.titleLarge,
+          ),
           Text(
               workout.startTime != null
                   ? "Started on: ${longFormatFormatter.format(workout.startTime!)}"
@@ -23,7 +29,10 @@ class SessionStatusWidget extends StatelessWidget {
           ),
         ],
         WorkoutState.paused => [
-          const Text("Paused session"),
+          Text(
+            "Paused session",
+            style: Theme.of(context).textTheme.titleLarge,
+          ),
           Text(
               workout.startTime != null
                   ? "Started on: ${longFormatFormatter.format(workout.startTime!)}"
@@ -31,7 +40,10 @@ class SessionStatusWidget extends StatelessWidget {
           ),
         ],
         WorkoutState.finished => [
-          const Text("Finished session"),
+          Text(
+            "Finished session",
+            style: Theme.of(context).textTheme.titleLarge,
+          ),
           Text(
               workout.startTime != null
                   ? "Started on: ${longFormatFormatter.format(workout.startTime!)}"

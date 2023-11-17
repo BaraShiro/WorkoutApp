@@ -4,7 +4,6 @@ import 'package:workout/add_session/add_session.dart';
 import 'package:workout_model/workout_model.dart';
 
 class AddSessionPage extends StatelessWidget {
-
   const AddSessionPage({super.key});
 
   static Route<void> route() {
@@ -16,18 +15,7 @@ class AddSessionPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Add workout session'),
-        // actions: <Widget>[
-        //   TextButton.icon(
-        //     onPressed: () => {},
-        //     icon: const Icon(Icons.delete),
-        //     label: const Text("Delete"),
-        //     style: TextButton.styleFrom(
-        //         foregroundColor: Theme.of(context).colorScheme.inversePrimary
-        //     ),
-        //   ),
-        // ],
       ),
-
       body: Center(
           child: BlocProvider(
             create: (_) => AddSessionBloc(
@@ -35,10 +23,8 @@ class AddSessionPage extends StatelessWidget {
                 exerciseRepository: ExerciseRepository.instance
             )..add(InitialEvent()),
             child: const AddSessionView(),
-
           )
       ),
     );
   }
 }
-

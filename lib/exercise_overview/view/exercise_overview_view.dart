@@ -31,16 +31,14 @@ class ExerciseOverviewView extends StatelessWidget {
               }
           ),
         }
-
       ),
       floatingActionButton: FloatingActionButton.extended(
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        foregroundColor: Theme.of(context).colorScheme.inversePrimary,
+        backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+        foregroundColor: Theme.of(context).colorScheme.onPrimaryContainer,
         onPressed: () => Navigator.push(context, AddExercisePage.route())
             .whenComplete(
               () => context.read<ExerciseOverviewBloc>().add(GetAllExercisesEvent()),
         ),
-        // onPressed: () => {context.read<ExerciseOverviewBloc>().add(AddExerciseEvent(exercise: Exercise(name: "Exercise", description: "Something", numberOfRepetitions: 2, restTimeInMinutes: 1, numberOfSets: 2, weightInKilograms: 5)))},
         label: const Text("New exercise"),
         icon: const Icon(Symbols.add),
       ),
@@ -48,7 +46,6 @@ class ExerciseOverviewView extends StatelessWidget {
   }
 
   Widget exerciseWidget(Exercise exercise, BuildContext context) {
-
     return Center(
       child: Padding(
         padding: const EdgeInsets.only(left: 5, right: 5),

@@ -100,22 +100,21 @@ class AddSessionView extends StatelessWidget {
                               state.selectedExercises[index], index, context);
                         }),
                   },
-
                   DropdownButtonHideUnderline(
                     child: Center(
                       child: DropdownButton(
-                        // isExpanded: true,
                         hint: const Text("Select an exercise to add"),
                         disabledHint: const Text("No exercises found"),
-                        items: state.allExercises.map<DropdownMenuItem<Exercise>>((Exercise value) {
-                          return DropdownMenuItem<Exercise>(value: value, child: Text(value.name));
+                        items: state.allExercises
+                            .map<DropdownMenuItem<Exercise>>((Exercise value) {
+                          return DropdownMenuItem<Exercise>(
+                              value: value, child: Text(value.name));
                         }).toList(),
                         onChanged: (exercise) => {
-                          context.read<AddSessionBloc>().add(
-                              AddExerciseToListEvent(exercise: exercise!)
-                          )
+                          context
+                              .read<AddSessionBloc>()
+                              .add(AddExerciseToListEvent(exercise: exercise!))
                         },
-
                       ),
                     ),
                   ),
@@ -149,18 +148,6 @@ class AddSessionView extends StatelessWidget {
           }
         },
       ),
-      // floatingActionButton: context.read<AddExerciseBloc>().state.isValid
-      //     ? FloatingActionButton.extended(
-      //         backgroundColor: Theme.of(context).colorScheme.primary,
-      //         foregroundColor: Theme.of(context).colorScheme.inversePrimary,
-      //         onPressed: () => {
-      //           // context.read<AddExerciseBloc>().add(AddExerciseSubmitEvent(workout: Workout(exercises: [Exercise(name: "Exercise", description: "Something", numberOfRepetitions: 2, restTimeInMinutes: 1, numberOfSets: 2, weightInKilograms: 5)])))
-      //         },
-      //         label: Text(
-      //             "Add exercise ${context.read<AddExerciseBloc>().state.isValid}"),
-      //         icon: const Icon(Icons.add),
-      //       )
-      //     : null,
     );
   }
 
@@ -172,6 +159,4 @@ class AddSessionView extends StatelessWidget {
       ),
     );
   }
-
-
 }

@@ -29,6 +29,7 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
 
   Future<void> _handleGetAllSessionsEvent({required GetAllSessionsEvent event, required Emitter<DashboardState> emit}) async {
     emit(DashboardListSessionsInProgress());
+
     Either<RepositoryError, List<Workout>> result = await _workoutRepository.list();
 
     result.match(

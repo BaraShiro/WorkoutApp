@@ -21,13 +21,12 @@ class AddSessionExerciseCardWidget extends StatelessWidget {
         ),
         borderRadius: const BorderRadius.all(Radius.circular(12)),
       ),
-      clipBehavior: Clip.hardEdge,
       child: ListTile(
         isThreeLine: true,
         titleAlignment: ListTileTitleAlignment.center,
         leading: Icon(
           Symbols.exercise,
-          color: Theme.of(context).colorScheme.primary,
+          color: Theme.of(context).colorScheme.onSurfaceVariant,
           size: 48,
         ),
         title: Text(exercise.name),
@@ -35,7 +34,8 @@ class AddSessionExerciseCardWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(exercise.description),
-            Text("${exercise.numberOfSets} ${exercise.numberOfRepetitions} ${exercise.restTimeInMinutes} ${exercise.weightInKilograms}"),
+            Text("${exercise.weightInKilograms} Kg"),
+            Text("${exercise.numberOfSets} sets with ${exercise.numberOfRepetitions} reps, ${exercise.restTimeInMinutes} min rest time "),
           ],
         ),
         trailing: IconButton(

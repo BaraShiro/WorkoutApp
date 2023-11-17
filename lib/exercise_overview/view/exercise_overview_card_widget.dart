@@ -14,16 +14,12 @@ class ExerciseOverviewCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       color: Theme.of(context).colorScheme.surfaceVariant,
-      elevation: 0,
-      shape: RoundedRectangleBorder(
-        side: BorderSide(
-          color: Theme.of(context).colorScheme.outline,
-        ),
-        borderRadius: const BorderRadius.all(Radius.circular(12)),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(12)),
       ),
       clipBehavior: Clip.hardEdge,
       child: InkWell(
-        splashColor: Theme.of(context).colorScheme.primary.withAlpha(50),
+        splashColor: Theme.of(context).colorScheme.primary.withAlpha(100),
         onTap: () => Navigator.push(context, ExercisePage.route(exercise.uuid))
             .whenComplete(
               () => context.read<ExerciseOverviewBloc>().add(GetAllExercisesEvent()),
@@ -33,7 +29,7 @@ class ExerciseOverviewCardWidget extends StatelessWidget {
           titleAlignment: ListTileTitleAlignment.center,
           leading: Icon(
             Symbols.exercise,
-            color: Theme.of(context).colorScheme.primary,
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
             size: 48,
           ),
           title: Text(exercise.name),
@@ -41,13 +37,14 @@ class ExerciseOverviewCardWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(exercise.description),
-                Text("${exercise.numberOfSets} ${exercise.numberOfRepetitions} ${exercise.restTimeInMinutes} ${exercise.weightInKilograms}"),
+                Text("${exercise.weightInKilograms} Kg"),
+                Text("${exercise.numberOfSets} sets with ${exercise.numberOfRepetitions} reps, ${exercise.restTimeInMinutes} min rest time "),
               ],
           ),
           trailing: IconButton(
               onPressed: () => context.read<ExerciseOverviewBloc>().add(DeleteExercisesEvent(exerciseUuid: exercise.uuid)),
               icon: Icon(
-                Symbols.delete,
+                Symbols.delete_forever,
                 color: Theme.of(context).colorScheme.error,
               )
           ),
