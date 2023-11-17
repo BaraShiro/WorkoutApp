@@ -21,13 +21,13 @@ class AddSessionBloc extends Bloc<AddSessionEvent, AddSessionState> {
     on<AddSessionEvent>((AddSessionEvent event, Emitter<AddSessionState> emit) async {
       switch (event) {
         case InitialEvent():
-        _handleInitialEvent(event, emit);
+          await _handleInitialEvent(event, emit);
         case AddExerciseToListEvent():
           _handleAddExerciseToListEvent(event, emit);
         case RemoveExerciseFromListEvent():
           _handleRemoveExerciseFromListEvent(event, emit);
         case SubmitEvent():
-          _handleSubmitEvent(event, emit);
+          await _handleSubmitEvent(event, emit);
       }
     });
   }
@@ -42,13 +42,15 @@ class AddSessionBloc extends Bloc<AddSessionEvent, AddSessionState> {
   }
 
   void _handleAddExerciseToListEvent(AddExerciseToListEvent event, Emitter<AddSessionState> emit) {
-    state.selectedExercises.add(event.exercise);
-    emit(state.copyWith(selectedExercises: state.selectedExercises));
+    List<Exercise> updatedExercises = state.selectedExercises.toList();
+    updatedExercises.add(event.exercise);
+    emit(state.copyWith(selectedExercises: updatedExercises));
   }
 
   void _handleRemoveExerciseFromListEvent(RemoveExerciseFromListEvent event, Emitter<AddSessionState> emit) {
-    state.selectedExercises.removeAt(event.index);
-    emit(state.copyWith(selectedExercises: state.selectedExercises));
+    List<Exercise> updatedExercises = state.selectedExercises.toList();
+    updatedExercises.removeAt(event.index);
+    emit(state.copyWith(selectedExercises: updatedExercises));
   }
 
   Future<void> _handleSubmitEvent(SubmitEvent event, Emitter<AddSessionState> emit) async {

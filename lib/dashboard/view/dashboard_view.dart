@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'package:workout/dashboard/dashboard.dart';
+import 'package:workout/add_session/add_session.dart';
 import 'package:workout_model/workout_model.dart';
 
 class DashboardView extends StatelessWidget {
@@ -34,7 +35,11 @@ class DashboardView extends StatelessWidget {
       floatingActionButton: FloatingActionButton.extended(
         backgroundColor: Theme.of(context).colorScheme.primary,
         foregroundColor: Theme.of(context).colorScheme.inversePrimary,
-        onPressed: () => {context.read<DashboardBloc>().add(AddSessionEvent(workout: Workout(exercises: [Exercise(name: "Exercise", description: "Something", numberOfRepetitions: 2, restTimeInMinutes: 1, numberOfSets: 2, weightInKilograms: 5)])))},
+        // onPressed: () => {context.read<DashboardBloc>().add(AddSessionEvent(workout: Workout(exercises: [Exercise(name: "Exercise", description: "Something", numberOfRepetitions: 2, restTimeInMinutes: 1, numberOfSets: 2, weightInKilograms: 5)])))},
+        onPressed: () => Navigator.push(context, AddSessionPage.route())
+            .whenComplete(
+              () => context.read<DashboardBloc>().add(GetAllSessionsEvent()),
+        ),
         label: const Text("New workout session"),
         icon: const Icon(Symbols.add),
       ),
