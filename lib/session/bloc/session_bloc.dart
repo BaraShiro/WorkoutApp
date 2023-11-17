@@ -27,8 +27,8 @@ class SessionBloc extends Bloc<SessionEvent, SessionState> {
           await _handleSessionResumeEvent(event: event, emit: emit);
         case SessionFinishEvent():
           await _handleSessionFinishEvent(event: event, emit: emit);
-        case SessionDeleteEvent():
-          await _handleSessionDeleteEvent(event: event, emit: emit);
+        case SessionResetEvent():
+          await _handleSessionResetEvent(event: event, emit: emit);
       }
     });
   }
@@ -71,12 +71,12 @@ class SessionBloc extends Bloc<SessionEvent, SessionState> {
     await readResult.match(
             (l) async => emit(SessionGetFailure(error: l)),
             (r) async {
-          Workout modifiedWorkout = r.pauseWorkout();
-          Either<RepositoryError, Workout> updateResult = await _workoutRepository.update(event.sessionUuid, modifiedWorkout);
+              Workout modifiedWorkout = r.pauseWorkout();
+              Either<RepositoryError, Workout> updateResult = await _workoutRepository.update(event.sessionUuid, modifiedWorkout);
 
-          updateResult.match(
-                  (l) => emit(SessionGetFailure(error: l)),
-                  (r) => emit(SessionGetSuccess(workout: r))
+              updateResult.match(
+                      (l) => emit(SessionGetFailure(error: l)),
+                      (r) => emit(SessionGetSuccess(workout: r))
           );
         }
     );
@@ -90,12 +90,12 @@ class SessionBloc extends Bloc<SessionEvent, SessionState> {
     await readResult.match(
             (l) async => emit(SessionGetFailure(error: l)),
             (r) async {
-          Workout modifiedWorkout = r.resumeWorkout();
-          Either<RepositoryError, Workout> updateResult = await _workoutRepository.update(event.sessionUuid, modifiedWorkout);
+              Workout modifiedWorkout = r.resumeWorkout();
+              Either<RepositoryError, Workout> updateResult = await _workoutRepository.update(event.sessionUuid, modifiedWorkout);
 
-          updateResult.match(
-                  (l) => emit(SessionGetFailure(error: l)),
-                  (r) => emit(SessionGetSuccess(workout: r))
+              updateResult.match(
+                      (l) => emit(SessionGetFailure(error: l)),
+                      (r) => emit(SessionGetSuccess(workout: r))
           );
         }
     );
@@ -109,18 +109,33 @@ class SessionBloc extends Bloc<SessionEvent, SessionState> {
     await readResult.match(
             (l) async => emit(SessionGetFailure(error: l)),
             (r) async {
-          Workout modifiedWorkout = r.stopWorkout();
-          Either<RepositoryError, Workout> updateResult = await _workoutRepository.update(event.sessionUuid, modifiedWorkout);
+              Workout modifiedWorkout = r.stopWorkout();
+              Either<RepositoryError, Workout> updateResult = await _workoutRepository.update(event.sessionUuid, modifiedWorkout);
 
-          updateResult.match(
-                  (l) => emit(SessionGetFailure(error: l)),
-                  (r) => emit(SessionGetSuccess(workout: r))
+              updateResult.match(
+                      (l) => emit(SessionGetFailure(error: l)),
+                      (r) => emit(SessionGetSuccess(workout: r))
           );
         }
     );
   }
 
-  Future<void> _handleSessionDeleteEvent({required SessionDeleteEvent event, required Emitter<SessionState> emit}) async {
-    // TODO: remove
+  Future<void> _handleSessionResetEvent({required SessionResetEvent event, required Emitter<SessionState> emit}) async {
+    emit(SessionGetInProgress());
+
+    Either<RepositoryError, Workout> readResult = await _workoutRepository.read(event.sessionUuid);
+
+    await readResult.match(
+            (l) async => emit(SessionGetFailure(error: l)),
+            (r) async {
+              Workout modifiedWorkout = r.resetWorkout();
+              Either<RepositoryError, Workout> updateResult = await _workoutRepository.update(event.sessionUuid, modifiedWorkout);
+
+              updateResult.match(
+                      (l) => emit(SessionGetFailure(error: l)),
+                      (r) => emit(SessionGetSuccess(workout: r))
+          );
+        }
+    );
   }
 }

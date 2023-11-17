@@ -70,7 +70,7 @@ class SessionControlWidget extends StatelessWidget {
               onPressed: () => {
                 context
                     .read<SessionBloc>()
-                    .add(SessionInitEvent(sessionUuid: workout.uuid))
+                    .add(SessionResetEvent(sessionUuid: workout.uuid))
               },
               icon: const Icon(Symbols.replay),
               label: const Text("Reset"),

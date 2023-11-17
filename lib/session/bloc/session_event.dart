@@ -28,6 +28,6 @@ final class SessionFinishEvent extends SessionEvent {
   const SessionFinishEvent({required super.sessionUuid});
 }
 
-final class SessionDeleteEvent extends SessionEvent {
-  const SessionDeleteEvent({required super.sessionUuid});
+final class SessionResetEvent extends SessionEvent {
+  const SessionResetEvent({required super.sessionUuid});
 }
